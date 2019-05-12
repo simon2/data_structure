@@ -13,6 +13,7 @@ Node* insert(Node* node, int x, int index);
 void delete(Node* node, int index);
 void travel(Node* node);
 int get(Node* node, int index);
+int search(Node* node, int data);
 
 int main(){
   int firstV;
@@ -30,6 +31,7 @@ int main(){
   delete(node,1);
   travel(node);
   get(node,2);
+  printf("%ld\n",search(node,10));
   return 0;
 }
 
@@ -78,8 +80,12 @@ void delete(Node* node, int index){
 int get(Node* node, int index){
   int i;
   Node* temp = node;
-  for(i=0;i<index;i++){
+  while(temp != NULL && i < index){
     temp = temp -> next;
+    i++;
+  }
+  if(temp == NULL){
+    return -1;
   }
   return temp->value;
 }
@@ -92,4 +98,21 @@ void travel(Node* node){
     temp = temp -> next;
   }
   printf("\n");
+}
+
+int search(Node* node, int data){
+  Node* temp = node;
+  int i = 0;
+  while(temp != NULL){
+    if(temp->value == data){
+      break;
+    }else{
+      temp = temp -> next;
+      i++;
+    }
+  }
+  if(temp == NULL){
+    i = -1;
+  }
+  return i;
 }
