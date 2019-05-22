@@ -21,15 +21,15 @@ int main(){
   scanf("%ld",&firstV);
   Node* root = createNode(firstV);
   insert(root,5);
-  travel(root);
+  travel(root);printf("\n");
   insert(root,10);
-  travel(root);
+  travel(root);printf("\n");
   insert(root,15);
-  travel(root);
+  travel(root);printf("\n");
   root = delete(root,15);
-  travel(root);
+  travel(root);printf("\n");
   root = delete(root,1);
-  travel(root);
+  travel(root);printf("\n");
   printf("%ld\n",search(root,10)->value);
   return 0;
 }
@@ -63,21 +63,22 @@ Node* delete(Node* root, int x){
   }else if(x > root->value){
     root->right = delete(root->right,x);
   }else{
-    if(root->left == NULL && root->right == NULL){
+    if(root->left == NULL && root->right == NULL){//no child
       free(root);
       root = NULL;
-    }else if(root->left == NULL){
+    }else if(root->left == NULL){//right child only
       Node* temp = root;
       root = root->right;
       free(temp);
-    }else if(root->right == NULL){
+    }else if(root->right == NULL){//left child only
       Node* temp = root;
       root = root->left;
       free(temp);
-    }else{
+    }else{//two children
       Node* temp = findmin(root->right);
       root->value = temp->value;
-      root->right = delete(root->right,temp->value);
+      //delete the smallest node in right sub-tree, because it has been copied to the node we want to delete initially. 
+      root->right = delete(root->right,temp->value); 
     }
   }
   return root;
@@ -106,7 +107,7 @@ Node* search(Node* root, int x){
 Node* findmin(Node* root){
   if(root == NULL){
     return NULL;
-  }else if(root -> left){
+  }else if(root -> left != NULL){
     return findmin(root->left);
   }else{
     return root;
