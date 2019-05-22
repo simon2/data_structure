@@ -62,11 +62,16 @@ void delete(Node* node, int index){
   int i;
   Node* temp = node;
   for(i=0;i<index-1;i++){
-    if(temp == NULL){
+    if(temp == NULL){//index should not larger than length.
       printf("input index is invalid!\n");
+      return;
     }else{
       temp = temp -> next;
     }
+  }
+  if(temp == NULL){//when linkedlist is empty.
+    printf("input index is invalid!\n");
+    return;
   }
   Node* temp2 = temp -> next;
   if(temp2 == NULL){

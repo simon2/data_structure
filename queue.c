@@ -49,7 +49,7 @@ void enqueue(Queue* queue, int x){
     printf("The queue is full, you cannot enqueue any element into it!\n");
   }else{
     queue->array[queue->front] = x;
-    if(queue->front == queue->length-1){
+    if(queue->front == queue->length-1){//to deal with the boundary problem in circular queue.
       queue->front = 0;
     }else{
       queue->front++;
@@ -64,7 +64,7 @@ int dequeue(Queue* queue){
     printf("The queue is empty, you cannot dequeue any element from it!\n");
   }else{
     result = queue->array[queue->rear];
-    if(queue->rear == queue->length-1){
+    if(queue->rear == queue->length-1){//to deal with the boundary problem in circular queue.
       queue->rear = 0;
     }else{
       queue->rear++;
