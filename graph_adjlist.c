@@ -10,10 +10,23 @@ struct Node{
   Node* next;
 };
 
+typedef struct Queue{
+  int* array;
+  int front;
+  int rear;
+  int count;
+  int length;
+}Queue;
+
+Queue createQueue();
+void enqueue(Queue* queue, int x);
+int dequeue(Queue* queue);
 void add_edge(int v, int w, int weight);
 void travel();
 void dfs_r(int v);
 void dfs();
+void bfs_r(int v);
+void bfs();
 
 Node** graph;
 int visited[N] = {0,0,0,0,0}; 
@@ -32,7 +45,8 @@ int main(){
   add_edge(1,4,2);
   add_edge(3,4,7);
   travel();
-  dfs();
+  //dfs();
+  bfs();
 }
 
 void add_edge(int v, int w, int weight){
@@ -88,3 +102,74 @@ void dfs(){
     dfs_r(i);
   }
 }
+
+void bfs_r(int v){
+  if(visited[v]){
+    return;
+  }
+  Queue q = createQueue();
+  enqueue(&q,v);
+  visited[v] = 1;
+
+  while(q.count != 0){
+    v = dequeue(&q);
+    printf("%d",v);
+  
+    Node* p = graph[v];
+    while(p){
+      if(!visited[p->v]){
+	enqueue(&q,p->v);
+	visited[p->v] = 1;
+      }
+      p = p -> next;
+    }
+  }
+}
+
+void bfs(){
+  int i;
+  for(i=0;i<N;i++){
+    bfs_r(i);
+  }
+}
+
+Queue createQueue(){
+  Queue queue;
+  queue.array = (int*)malloc(sizeof(int)*N);
+  queue.front = 0;
+  queue.rear = 0;
+  queue.count = 0;
+  queue.length = N;
+  return queue;
+}
+
+void enqueue(Queue* queue, int x){
+  if(queue->count >= queue->length){
+    printf("The queue is full, you cannot enqueue any element into it!\n");
+  }else{
+    queue->array[queue->front] = x;
+    if(queue->front == queue->length-1){//to deal with the boundary problem in circular queue.
+      queue->front = 0;
+    }else{
+      queue->front++;
+    }
+    queue->count++;
+  }
+}
+
+int dequeue(Queue* queue){
+  int result = -1;
+  if(queue->count==0){
+    printf("The queue is empty, you cannot dequeue any element from it!\n");
+  }else{
+    result = queue->array[queue->rear];
+    if(queue->rear == queue->length-1){//to deal with the boundary problem in circular queue.
+      queue->rear = 0;
+    }else{
+      queue->rear++;
+    }
+    queue->count--;
+  }
+  return result;
+}
+
