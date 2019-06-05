@@ -5,6 +5,7 @@
 #define N 5
 
 int* dijkstra(int v);
+int* prim();
 int min_dist(int dist[]);
 
 int graph[N][N] =
@@ -22,6 +23,13 @@ int main(){
   int i;
   for(i=0;i<N;i++){
     printf("the shortest path of 0 to %ld is %ld\n",i , dist[i]);
+  }
+  for(i=0;i<N;i++){
+    visited[i] = 0;
+  }
+  int* parent = prim();
+  for(i=0;i<N;i++){
+    printf("the parent of %ld is %d\n",i,parent[i]);
   }
 }
 
@@ -58,4 +66,26 @@ int min_dist(int* dist){
   return min_index;
 }
 
+int* prim(){
+  int* parent = (int*)malloc(sizeof(int)*N);
+  int* dist = (int*)malloc(sizeof(int)*N);
+  int i;
+  for(i=0;i<N;i++){
+    dist[i] = INT_MAX;
+  }
+  dist[0] = 0;
+  parent[0] = -1;
 
+  for(i=0;i<N-1;i++){
+    int u = min_dist(dist);
+    visited[u] = 1;
+    int v;
+    for(v=0;v<N;v++){
+      if(graph[u][v] && visited[v] == 0 && graph[u][v] < dist[v]){
+	parent[v] = u;
+	dist[v] = graph[u][v];
+      }
+    }
+  }
+  return parent;
+}
