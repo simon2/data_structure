@@ -7,6 +7,9 @@
 void bubbleSort(int* a);
 void insertSort(int* a);
 void selectSort(int* a);
+void shellSort(int* a);
+void mergeSort(int* a, int left, int right);
+void merge(int* a, int left, int mid, int right);
 
 int main(){
   int* a = (int*)malloc(sizeof(int)*N);
@@ -18,7 +21,8 @@ int main(){
   printf("\n");
   //bubbleSort(a);
   //insertSort(a);
-  selectSort(a);
+  //selectSort(a);
+  shellSort(a);
   for(i=0;i<N;i++){
     printf("%ld ", a[i]);
   }
@@ -54,6 +58,21 @@ void insertSort(int* a){
   }
 }
 
+void shellSort(int* a){
+  int i,j;
+  int gap;
+  int temp;
+  for(gap=N>>1;gap>0;gap>>=1){
+    for(i=gap;i<N;i++){
+      temp = a[i];
+      for(j=i-gap;j>=0&&a[j]>temp;j-=gap){
+	a[j+gap] = a[j];
+      }
+      a[j+gap] = temp;
+    }
+  }
+}
+
 void selectSort(int* a){
   int i,j;
   for(i=0;i<N;i++){
@@ -68,5 +87,44 @@ void selectSort(int* a){
     int temp = a[i];
     a[i] = a[min_index];
     a[min_index] = temp;
+  }
+}
+
+void mergeSort(int* a, int left, int right){
+  if(left<right){
+    int mid = (left + right)/2;
+    mergeSort(a,left,mid);
+    mergeSort(a,mid+1,right);
+    merge(a,left,mid,right);
+  }
+}
+
+void merge(int*a, int left, int mid, int right){
+  int* temp = (int*)malloc(sizeof(int)*(right-left+1));
+  int l = left;
+  int m = mid + 1;
+  int i = 0;
+  while(l <= mid && m <= right){
+    if(a[l]<=a[m]){
+      temp[i] = a[l];
+      l++;
+    }else{
+      temp[i] = a[m];
+      m++;
+    }
+    i++;
+  }
+  while(l<=mid){
+    temp[i] = a[l];
+    l++;
+    i++;
+  }
+  while(m<=right){
+    temp[i] = a[m];
+    m++;
+    i++;
+  }
+  for(i=left;i<=right;i++){
+    a[i] = temp[i-left];
   }
 }
