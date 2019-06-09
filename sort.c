@@ -10,6 +10,7 @@ void selectSort(int* a);
 void shellSort(int* a);
 void mergeSort(int* a, int left, int right);
 void merge(int* a, int left, int mid, int right);
+void quickSort(int*a, int left, int right);
 
 int main(){
   int* a = (int*)malloc(sizeof(int)*N);
@@ -22,7 +23,9 @@ int main(){
   //bubbleSort(a);
   //insertSort(a);
   //selectSort(a);
-  shellSort(a);
+  //shellSort(a);
+  //mergeSort(a,0,N-1);
+  quickSort(a,0,N);
   for(i=0;i<N;i++){
     printf("%ld ", a[i]);
   }
@@ -126,5 +129,32 @@ void merge(int*a, int left, int mid, int right){
   }
   for(i=left;i<=right;i++){
     a[i] = temp[i-left];
+  }
+}
+
+void quickSort(int* a, int left, int right){
+  int i,j,pivot;
+  if(left < right){
+    pivot = left;
+    i = left;
+    j = right;
+    while(i < j){
+      while(a[i] <= a[pivot] && i < right){
+	i++;
+      }
+      while(a[j] > a[pivot] && j > left){
+	j--;
+      }
+      if(i < j){
+	int temp = a[i];
+	a[i] = a[j];
+	a[j] = temp;
+      }
+    }
+    int temp = a[j];
+    a[j] = a[pivot];
+    a[pivot] = temp;
+    quickSort(a,left,j-1);
+    quickSort(a,j+1,right);
   }
 }
