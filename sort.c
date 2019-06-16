@@ -20,12 +20,12 @@ int main(){
     printf("%ld ", a[i]);
   }
   printf("\n");
-  //bubbleSort(a);
+  bubbleSort(a);
   //insertSort(a);
   //selectSort(a);
   //shellSort(a);
   //mergeSort(a,0,N-1);
-  quickSort(a,0,N);
+  //quickSort(a,0,N);
   for(i=0;i<N;i++){
     printf("%ld ", a[i]);
   }
@@ -34,15 +34,21 @@ int main(){
 void bubbleSort(int* a){
   int length = N;
   int i;
+  int didswap;
   while(length>0){
+    didswap = 0;
     for(i=0;i<length-1;i++){
       if(a[i] > a[i+1]){
 	int temp = a[i];
 	a[i] = a[i+1];
 	a[i+1] = temp;
+	didswap = 1;
       }
     }
     length--;
+    if(didswap==0){
+      return;
+    }
   }
 }
 
