@@ -13,7 +13,7 @@ Queue createQueue(int length);
 void enqueue(Queue* queue, int x);
 int dequeue(Queue* queue);
 int top(Queue queue);
-void travel(Queue queue);
+void traverse(Queue queue);
 
 int main(){
   int length;
@@ -21,17 +21,17 @@ int main(){
   scanf("%ld",&length);
   Queue queue = createQueue(length);
   enqueue(&queue,5);
-  travel(queue);
+  traverse(queue);
   enqueue(&queue,10);
-  travel(queue);
+  traverse(queue);
   enqueue(&queue,15);
-  travel(queue);
+  traverse(queue);
   enqueue(&queue,3);
-  travel(queue);
+  traverse(queue);
   printf("%ld\n",dequeue(&queue));
-  travel(queue);
+  traverse(queue);
   printf("%ld\n", top(queue));
-  travel(queue);
+  traverse(queue);
 }
 
 Queue createQueue(int length){
@@ -78,7 +78,7 @@ int top(Queue queue){
   return queue.array[queue.rear];
 }
 
-void travel(Queue queue){
+void traverse(Queue queue){
   if(queue.count != 0){
     int i = queue.rear;
     do{

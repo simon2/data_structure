@@ -9,7 +9,7 @@ int hash(int value);
 int search(int value);
 void insert(int value);
 void delete(int value);
-void travel();
+void traverse();
 
 int hash_table[SIZE];
 int count = 0;
@@ -19,23 +19,23 @@ int main(){
   for(i=0;i<SIZE;i++){
     hash_table[i] = EMPTY;
   }
-  travel();
+  traverse();
   insert(1);
-  travel();
+  traverse();
   insert(2);
-  travel();
+  traverse();
   insert(3);
-  travel();
+  traverse();
   insert(4);
-  travel();
+  traverse();
   insert(5);
-  travel();
+  traverse();
   insert(6);
-  travel();
+  traverse();
   delete(1);
-  travel();
+  traverse();
   delete(6);
-  travel();
+  traverse();
 }
 
 int hash(int value){
@@ -86,7 +86,7 @@ void delete(int value){
   }
 }
 
-void travel(){
+void traverse(){
   int i;
   for(i=0;i<SIZE;i++){
     if(hash_table[i] == EMPTY){

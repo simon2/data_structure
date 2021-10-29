@@ -11,7 +11,7 @@ Stack createStack(int length);
 void push(Stack* stack, int x);
 int pop(Stack* stack);
 int top(Stack stack);
-void travel(Stack stack);
+void traverse(Stack stack);
 
 int main(){
   int length;
@@ -19,17 +19,17 @@ int main(){
   scanf("%ld",&length);
   Stack stack = createStack(length);
   push(&stack,5);
-  travel(stack);
+  traverse(stack);
   push(&stack,10);
-  travel(stack);
+  traverse(stack);
   push(&stack,15);
-  travel(stack);
+  traverse(stack);
   push(&stack,3);
-  travel(stack);
+  traverse(stack);
   printf("%ld\n",pop(&stack));
-  travel(stack);
+  traverse(stack);
   printf("%ld\n", top(stack));
-  travel(stack);
+  traverse(stack);
 }
 
 Stack createStack(int length){
@@ -63,7 +63,7 @@ int top(Stack stack){
   return stack.array[stack.head-1];
 }
 
-void travel(Stack stack){
+void traverse(Stack stack){
   int i;
   for(i=0;i<stack.head;i++){
     printf("%ld ", stack.array[i]);

@@ -11,7 +11,7 @@ Node* createNode(int value);
 Node* enqueue(Node* head, int x);
 int dequeue(Node** head);
 int top(Node* head);
-void travel(Node* head);
+void traverse(Node* head);
 
 int main(){
   int firstV;
@@ -19,17 +19,17 @@ int main(){
   scanf("%ld",&firstV);
   Node* head = createNode(firstV);
   enqueue(head,5);
-  travel(head);
+  traverse(head);
   enqueue(head,10);
-  travel(head);
+  traverse(head);
   enqueue(head,15);
-  travel(head);
+  traverse(head);
   enqueue(head,3);
-  travel(head);
+  traverse(head);
   printf("%ld\n",dequeue(&head));
-  travel(head);
+  traverse(head);
   printf("%ld\n", top(head));
-  travel(head);
+  traverse(head);
 }
 
 Node* createNode(int data){
@@ -75,7 +75,7 @@ int top(Node* head){
   return result;
 }
 
-void travel(Node* head){
+void traverse(Node* head){
   Node* temp = head;
   while(temp != NULL){
     printf("%ld ", temp->value);

@@ -11,7 +11,7 @@ struct Node{
 Node* createNode(int value);
 Node* insert(Node* root, int x);
 Node* delete(Node* root, int x);
-void travel(Node* root);
+void traverse(Node* root);
 Node* search(Node* root, int data);
 Node* findmin(Node* root);
 
@@ -21,15 +21,15 @@ int main(){
   scanf("%ld",&firstV);
   Node* root = createNode(firstV);
   insert(root,5);
-  travel(root);printf("\n");
+  traverse(root);printf("\n");
   insert(root,10);
-  travel(root);printf("\n");
+  traverse(root);printf("\n");
   insert(root,15);
-  travel(root);printf("\n");
+  traverse(root);printf("\n");
   root = delete(root,15);
-  travel(root);printf("\n");
+  traverse(root);printf("\n");
   root = delete(root,1);
-  travel(root);printf("\n");
+  traverse(root);printf("\n");
   printf("%ld\n",search(root,10)->value);
   return 0;
 }
@@ -84,11 +84,11 @@ Node* delete(Node* root, int x){
   return root;
 }
 
-void travel(Node* root){
+void traverse(Node* root){
   if(root){
     printf("%d ",root->value);
-    travel(root->left);
-    travel(root->right);
+    traverse(root->left);
+    traverse(root->right);
   }
 }
 

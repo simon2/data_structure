@@ -14,7 +14,7 @@ int hash(int key);
 int search(int key);
 void insert(int key, int value);
 void delete(int key);
-void travel();
+void traverse();
 
 Node** hash_table;
 
@@ -24,23 +24,23 @@ int main(){
   for(i=0;i<SIZE;i++){
     hash_table[i] = NULL;
   }
-  travel();
+  traverse();
   insert(1,1);
-  travel();
+  traverse();
   insert(2,2);
-  travel();
+  traverse();
   insert(3,3);
-  travel();
+  traverse();
   insert(4,4);
-  travel();
+  traverse();
   insert(5,5);
-  travel();
+  traverse();
   insert(6,6);
-  travel();
+  traverse();
   delete(1);
-  travel();
+  traverse();
   delete(6);
-  travel();
+  traverse();
 }
 
 int hash(int key){
@@ -100,7 +100,7 @@ void delete(int key){
   }
 }
 
-void travel(){
+void traverse(){
   int i;
   for(i=0;i<SIZE;i++){
     printf("hash_code:%ld: ",i);

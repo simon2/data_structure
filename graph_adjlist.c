@@ -22,7 +22,7 @@ Queue createQueue();
 void enqueue(Queue* queue, int x);
 int dequeue(Queue* queue);
 void add_edge(int v, int w, int weight);
-void travel();
+void traverse();
 void dfs_r(int v);
 void dfs();
 void bfs_r(int v);
@@ -44,7 +44,7 @@ int main(){
   add_edge(2,3,3);
   add_edge(1,4,2);
   add_edge(3,4,7);
-  travel();
+  traverse();
   //dfs();
   bfs();
 }
@@ -68,7 +68,7 @@ void add_edge(int v, int w, int weight){
   }
 }
 
-void travel(){
+void traverse(){
   int i;
   for(i=0;i<N;i++){
     printf("vertex %ld: ", i);

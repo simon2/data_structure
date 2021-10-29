@@ -11,7 +11,7 @@ struct Node{
 Node* createNode(int value);
 Node* insert(Node* node, int x, int index);
 void delete(Node* node, int index);
-void travel(Node* node);
+void traverse(Node* node);
 int get(Node* node, int index);
 int search(Node* node, int data);
 
@@ -21,15 +21,15 @@ int main(){
   scanf("%ld",&firstV);
   Node* node = createNode(firstV);
   insert(node,5,1);
-  travel(node);
+  traverse(node);
   insert(node,10,2);
-  travel(node);
+  traverse(node);
   insert(node,15,3);
-  travel(node);
+  traverse(node);
   delete(node,3);
-  travel(node);
+  traverse(node);
   delete(node,1);
-  travel(node);
+  traverse(node);
   get(node,2);
   printf("%ld\n",search(node,10));
   return 0;
@@ -95,7 +95,7 @@ int get(Node* node, int index){
   return temp->value;
 }
 
-void travel(Node* node){
+void traverse(Node* node){
   int i;
   Node* temp = node;
   while(temp != NULL){
