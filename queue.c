@@ -48,11 +48,11 @@ void enqueue(Queue* queue, int x){
   if(queue->count >= queue->length){
     printf("The queue is full, you cannot enqueue any element into it!\n");
   }else{
-    queue->array[queue->front] = x;
-    if(queue->front == queue->length-1){//to deal with the boundary problem in circular queue.
-      queue->front = 0;
+    queue->array[queue->rear] = x;
+    if(queue->rear == queue->length-1){//to deal with the boundary problem in circular queue.
+      queue->rear = 0;
     }else{
-      queue->front++;
+      queue->rear++;
     }
     queue->count++;
   }
@@ -63,11 +63,11 @@ int dequeue(Queue* queue){
   if(queue->count==0){
     printf("The queue is empty, you cannot dequeue any element from it!\n");
   }else{
-    result = queue->array[queue->rear];
-    if(queue->rear == queue->length-1){//to deal with the boundary problem in circular queue.
-      queue->rear = 0;
+    result = queue->array[queue->front];
+    if(queue->front == queue->length-1){//to deal with the boundary problem in circular queue.
+      queue->front = 0;
     }else{
-      queue->rear++;
+      queue->front++;
     }
     queue->count--;
   }
@@ -75,7 +75,7 @@ int dequeue(Queue* queue){
 }
 
 int top(Queue queue){
-  return queue.array[queue.rear];
+  return queue.array[queue.front];
 }
 
 void traverse(Queue queue){
@@ -88,7 +88,7 @@ void traverse(Queue queue){
       }else{
 	i++;
       }
-    }while(i != queue.front);
+    }while(i != queue.rear);
     printf("\n");
   }
 }
