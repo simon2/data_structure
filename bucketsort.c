@@ -4,6 +4,7 @@ int hash(int num){
     return num / 10;
 }
 
+
 void insert(int bucket[], int size, int num){
     int i;
     for(i=size-1;i>=0;i--){
