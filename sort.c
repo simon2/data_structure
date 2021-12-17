@@ -11,6 +11,9 @@ void shellSort(int* a);
 void mergeSort(int* a, int left, int right);
 void merge(int* a, int left, int mid, int right);
 void quickSort(int*a, int left, int right);
+void countingSort(int nums[], int n);
+void radix_counting_sort(int *nums, int n, int exp, int radix);
+void radix_sort(int *nums, int n);
 
 int main(){
   int* a = (int*)malloc(sizeof(int)*N);
@@ -163,4 +166,60 @@ void quickSort(int* a, int left, int right){
     quickSort(a,left,j-1);
     quickSort(a,j+1,right);
   }
+}
+
+void countingSort(int *nums, int n){
+  int high = max(nums, n);
+  int low = min(nums, n);
+  int size = high - low + 1;
+  int *output = (int *)malloc(sizeof(int) * n);
+  int *count = (int *)malloc(sizeof(int) * size);
+  int i;
+  for(i=0; i<size; i++)
+    count[i] = 0;
+  for(i=0;i<size;i++)
+    count[nums[i]-low]++;
+  for(i=1;i<size;i++)
+    count[i] += count[i-1];
+  for(i=0;i<n;i++){
+    int num = nums[i];
+    int pos = count[num - low] - 1;
+    output[pos] = nums[i];
+    count[num - low]--;
+  }
+  for(i=0;i<n;i++){
+    nums[i] = output[i];
+  }
+  free(output);
+  free(count);
+}
+
+void radix_counting_sort(int *nums, int n, int exp, int radix){
+  int *output = (int *)malloc(sizeof(int) * n);
+  int *count = (int *)malloc(sizeof(int) * radix);
+
+  int i;
+  for(i=0;i<radix;i++)
+    count[i] = 0;
+  for(i=0;i<n;i++)
+    count[(nums[i]/exp)%radix]++;
+  for(i=1;i<radix;i++)
+    count[i] += count[i-1];
+  for(i=n-1;i>=0;i--){
+    int num = nums[i];
+    output[count[(num/exp)%radix]-1]--;
+    count[(num/exp)%radix]--;
+  }
+  for(i=0;i<n;i++){
+    nums[i] = output[i];
+  }
+}
+
+void radix_sort(int *nums, int n){
+  int radix = 10;
+  int mx = max(nums, n);
+
+  int exp;
+  for(exp=1;mx/exp>0;exp*=radix)
+    radix_counting_sort(nums, n, exp, radix);
 }
