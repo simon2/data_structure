@@ -177,11 +177,11 @@ void countingSort(int *nums, int n){
   int i;
   for(i=0; i<size; i++)
     count[i] = 0;
-  for(i=0;i<size;i++)
+  for(i=0;i<n;i++)
     count[nums[i]-low]++;
   for(i=1;i<size;i++)
     count[i] += count[i-1];
-  for(i=0;i<n;i++){
+  for(i=n-1;i>=0;i--){
     int num = nums[i];
     int pos = count[num - low] - 1;
     output[pos] = nums[i];

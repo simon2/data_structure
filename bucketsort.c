@@ -13,7 +13,7 @@ void insert(int bucket[], int size, int num){
         else
             break;
     }
-    bucked[i+1] = num;
+    bucket[i+1] = num;
 }
 
 void bucket_sort(int nums[], int n){
