@@ -179,3 +179,65 @@ int pop(){
 int depth(){
     return SIZE - sp;
 }
+
+//4.9(1)
+struct node *insert_node(int x, struct node *p){
+    if(p==NULL){
+        p = malloc();
+        p -> data = x;//A
+        p -> left = NULL;
+        p -> right = NULL;
+        return p;
+    }
+
+    if (x==p->data)
+        return p;
+    
+    if(x<p->data)//B
+        p->left = insert_node(x,p->left);//C
+    else
+        p->right = insert_node(x,p->right);//D
+    return p;
+}
+
+//(2)
+int sum_node(struct node *p){
+    if(p==NULL)
+        return 0;
+    return p->data + sum_node(p->left) + sum_node(p->right);
+}
+
+//(3)
+int search_node(int x, struct node *p){
+    struct node *q;
+    q = p;
+    while(q){
+        if(x == q->data){
+            return 1;
+        }
+        if(x<q->data)
+            q = q->left//;
+        else
+            q = q->right//;
+    }
+    return 0;
+}
+
+//4.13(1)
+#define EMPTY -1
+#define SKIP 3
+
+int next(int x){
+    x = x + SKIP;
+    return x % MAX;
+}
+
+int search(int *table, int d){
+    int h;
+    h = hash(d);
+    while(table[h] != EMPTY){
+        if(table[h]==d) return h;
+        h = next(h);
+    }
+    return -1;
+}
