@@ -241,3 +241,39 @@ int search(int *table, int d){
     }
     return -1;
 }
+
+//4.14
+
+void traverse(int start, int goal){
+    struct queue *q;
+    int dist[N];
+    int prev, node;
+    for(node=0;node<N;node++){
+        dist[node] = -1;
+    }
+    q = make_queue();
+    dist[start] = 0;
+    enqueue(q,start);
+    printf("start from node", start);
+
+    while(!is_empty()){
+        prev = dequeue(q);
+        for(node=0;node<N;node++){
+            if(Adj[prev][node] == 1){
+                if(dist[node] == -1){
+                    dist[node] = dist[prev] + 1;
+                    printf();
+                    if(node == goal){
+                        printf("path found...")
+                    }
+                    destroy_queue(q);
+                    return;
+                }else{
+                    enqueue(q,node);
+                }
+            }
+        }
+    }
+    printf("no path");
+    destroy_queue(q);
+}

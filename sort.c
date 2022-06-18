@@ -42,10 +42,10 @@ void bubbleSort(int* a){
     didswap = 0;
     for(i=0;i<length-1;i++){
       if(a[i] > a[i+1]){
-	int temp = a[i];
-	a[i] = a[i+1];
-	a[i+1] = temp;
-	didswap = 1;
+        int temp = a[i]; //swap()
+        a[i] = a[i+1];
+        a[i+1] = temp;
+        didswap = 1;
       }
     }
     length--;
@@ -78,7 +78,7 @@ void shellSort(int* a){
     for(i=gap;i<N;i++){
       temp = a[i];
       for(j=i-gap;j>=0&&a[j]>temp;j-=gap){
-	a[j+gap] = a[j];
+	      a[j+gap] = a[j];
       }
       a[j+gap] = temp;
     }
